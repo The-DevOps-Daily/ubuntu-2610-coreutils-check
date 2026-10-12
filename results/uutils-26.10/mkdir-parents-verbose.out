@@ -1,0 +1,3 @@
+mkdir: created directory 'new'
+mkdir: created directory 'new/a'
+mkdir: created directory 'new/a/b'

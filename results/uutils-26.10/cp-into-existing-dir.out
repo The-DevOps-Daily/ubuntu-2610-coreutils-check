@@ -1,0 +1,7 @@
+exists
+exists/dir
+exists/dir/.hidden
+exists/dir/a
+exists/dir/sub
+exists/dir/sub/b
+exists/target.txt

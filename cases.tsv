@@ -1,0 +1,163 @@
+# id	command  (runs in bash -c, cwd /work, LC_ALL=C.UTF-8, TZ=UTC)
+version-ls	ls --version | head -1
+version-date	date --version | head -1
+detect-gnu-date	if date --version 2>/dev/null | grep -q GNU; then echo gnu-path; else echo bsd-path; fi
+detect-gnu-stat	if stat --version 2>/dev/null | grep -q GNU; then echo gnu-path; else echo bsd-path; fi
+ls-long-timestyle	ls -l --time-style=+%Y-%m-%d hello.txt
+ls-long-iso	ls -l --time-style=long-iso hello.txt words.txt
+ls-human	ls -lh zeros.bin | awk '{print $5}'
+ls-one-sorted	ls -1 mixed.txt dir exists hello.txt
+ls-all	ls -A dir
+ls-dirs-only	ls -d */
+ls-missing	ls nope.txt
+ls-bad-option	ls --bogus
+ls-sort-mixed-names	mkdir m && cd m && touch b B a A _c 1 && ls
+cp-archive-mtime	cp -a hello.txt c.txt && stat -c '%Y %a' c.txt
+cp-into-existing-dir	cp -r dir exists && find exists | sort
+cp-no-clobber	cp -n target.txt exists/target.txt; echo "rc=$?"; cat exists/target.txt
+cp-update-none	cp --update=none target.txt exists/target.txt; echo "rc=$?"; cat exists/target.txt
+cp-backup-numbered	cp --backup=numbered target.txt exists/target.txt && cp --backup=numbered target.txt exists/target.txt && ls exists
+cp-missing	cp nope.txt x.txt
+cp-dir-without-r	cp dir dir2
+mv-no-clobber	mv -n target.txt exists/target.txt; echo "rc=$?"; cat exists/target.txt; ls target.txt
+mv-missing	mv nope.txt x.txt
+rm-missing-f	rm -f nope.txt; echo "rc=$?"
+rm-missing	rm nope.txt
+rm-dir	rm dir
+chmod-symbolic	chmod u+x,go-r hello.txt && stat -c '%a' hello.txt
+chmod-missing	chmod 755 nope.txt
+chown-numeric	chown 1000:1000 hello.txt && stat -c '%u:%g' hello.txt
+sort-human	sort -h sizes.txt
+sort-version	sort -V versions.txt
+sort-key-numeric	sort -t, -k2,2n -k1,1 people.csv
+sort-unique-fold	sort -uf mixed.txt
+sort-mixed-c-utf8	sort mixed.txt
+sort-check	sort -c words.txt; echo "rc=$?"
+sort-reverse-numeric	printf '10\n9\n100\n-1\n1e3\n' | sort -rn
+sort-general-numeric	printf '10\n9\n100\n-1\n1e3\n' | sort -g
+uniq-count	sort dup.txt | uniq -c
+uniq-dupes	sort dup.txt | uniq -d
+date-relative	date -d '2026-10-12 +3 days' +%F
+date-epoch	date -u -d @0 '+%F %T'
+date-iso	date -u -d '2026-10-12 09:30:00' -Iseconds
+date-rfc2822	date -u -d '2026-10-12 09:30:00' -R
+date-rfc3339	date -u -d '2026-10-12 09:30:00' --rfc-3339=seconds
+date-next-monday	date -d 'next monday' +%A
+date-nanos-len	date +%N | tr -d '\n' | wc -c
+date-invalid	date -d 'not a date'
+date-weekday-name	date -d '2026-10-12' '+%a %b %e'
+date-file-ref	date -u -r hello.txt '+%F %T'
+stat-format	stat -c '%s %a %F' hello.txt dir
+stat-mtime	stat -c '%y' hello.txt
+stat-printf	stat --printf '%n|%s\n' hello.txt
+wc-lines-stdin	wc -l < words.txt
+wc-file	wc -c hello.txt words.txt
+wc-chars-utf8	wc -m utf8.txt
+head-negative	head -n -2 words.txt
+head-bytes-negative	head -c -3 hello.txt | od -An -c
+tail-plus	tail -n +4 words.txt
+tail-bytes	tail -c 4 words.txt
+cut-fields	cut -d: -f1,7 passwd.txt
+cut-chars-utf8	cut -c1-4 utf8.txt
+cut-complement	cut -d, -f2 --complement people.csv
+tr-crlf	tr -d '\r' < crlf.txt | od -An -c
+tr-upper-utf8	tr '[:lower:]' '[:upper:]' < utf8.txt
+tr-squeeze	echo 'a    b   c' | tr -s ' '
+seq-width	seq -w 8 11
+seq-format	seq -f '%03g' 1 3
+seq-float	seq 0.1 0.1 0.3
+printf-float	env printf '%05.2f|%x|%o\n' 3.14159 255 8
+printf-q	env printf '%q\n' 'a b$c'
+printf-b	env printf '%b\n' 'a\tb'
+expr-arith	expr 3 + 4 \* 2
+expr-zero-rc	expr 0 + 0; echo "rc=$?"
+expr-substr	expr substr abcdef 2 3
+expr-match	expr match 'release-1.2' '.*-\(.*\)'
+numfmt-to-iec	numfmt --to=iec 1048576 1536
+numfmt-from-iec	numfmt --from=iec 1K 1M
+du-bytes	du -sb dir
+du-apparent	du -s --apparent-size --block-size=1 zeros.bin
+df-output	df --output=target / | head -2
+df-posix-header	df -P / | head -1
+realpath-relative	realpath --relative-to=/usr /usr/bin
+basename-suffix	basename -s .txt /work/hello.txt
+basename-multi	basename -a /a/b.txt /c/d.txt
+dirname-multi	dirname /a/b/c.txt d.txt
+readlink-f	ln -s hello.txt link && readlink -f link
+ln-relative	mkdir -p l/x && ln -sr hello.txt l/x/rel && readlink l/x/rel
+mktemp-dir-pattern	t=$(mktemp -d -p /work) && basename "$t" | sed 's/[A-Za-z0-9]/X/g'
+mktemp-suffix	t=$(mktemp --suffix=.json -p /work) && basename "$t" | sed 's/tmp\.[A-Za-z0-9]*/tmp.RANDOM/'
+install-deep	install -D -m 640 hello.txt out/a/b/h.txt && stat -c '%a %s' out/a/b/h.txt
+touch-date	touch -d '2021-06-01 12:00 UTC' t.txt && stat -c '%Y' t.txt
+base64-nowrap	head -c 60 zeros.bin | base64 -w0; echo
+base64-bad	echo 'not*base64' | base64 -d; echo "rc=$?"
+sha256-check-ok	sha256sum -c hello.sha256
+sha256-check-bad	sha256sum -c bad.sha256; echo "rc=$?"
+sha256-check-quiet	sha256sum -c --quiet hello.sha256; echo "rc=$?"
+sha256-missing	sha256sum nope.txt
+md5-tag	md5sum --tag hello.txt
+env-clear	env -i FOO=1 "$(command -v printenv)"
+env-unset	FOO=1 BAR=2 env -u FOO printenv FOO BAR; echo "rc=$?"
+timeout-rc	timeout 1 sleep 5; echo "rc=$?"
+timeout-preserve	timeout --preserve-status 1 sleep 5; echo "rc=$?"
+timeout-kill	timeout -s KILL 1 sleep 5; echo "rc=$?"
+od-hex	od -An -tx1 hello.txt
+od-chars	od -c hello.txt
+split-numeric	split -l 2 -d --additional-suffix=.txt words.txt part- && ls part-*
+paste-serial	paste -sd, words.txt
+comm-cols	comm <(sort dup.txt | uniq) <(printf 'apple\ndate\n')
+join-fields	join -t, <(sort people.csv) <(printf 'alice,NL\nbob,BG\n')
+nl-default	nl words.txt
+fold-width	echo 'abcdefghij' | fold -w 4
+dd-summary	dd if=/dev/zero of=dd.bin bs=1024 count=10 2>&1 | tail -1 | sed 's/[0-9.]* s,.*//'
+dd-status-none	dd if=/dev/zero of=dd.bin bs=1024 count=10 status=none; echo "rc=$?"
+tee-append	echo one | tee -a hello.txt > /dev/null && tail -1 hello.txt
+test-binary	env test -n '' ; echo "rc=$?"
+nproc-positive	n=$(nproc); [ "$n" -gt 0 ] && echo positive
+id-user	id -un
+whoami	whoami
+cat-missing	cat nope.txt
+cat-number	cat -n words.txt | head -2
+tac-lines	tac words.txt | head -2
+shuf-seeded	shuf -n 3 --random-source=zeros.bin words.txt
+truncate-size	truncate -s 1K t.bin && stat -c %s t.bin
+yes-head	yes ok | head -2
+echo-binary-e	env echo -e 'a\tb'
+ls-long-multi-align	ls -ln --time-style=+%F hello.txt zeros.bin words.txt | awk '{print $1, $5, $7}'
+ls-symlink	ln -s hello.txt lnk && ls -l --time-style=+%F lnk | awk '{print $1, $(NF-2), $(NF-1), $NF}'
+ls-classify	ls -F dir
+ls-sort-time	touch -d '2022-01-01' a1 && touch -d '2023-01-01' a2 && ls -t a1 a2
+ls-quoting-space	touch 'with space' && ls
+du-human	du -sh dir zeros.bin | awk '{print $1}'
+df-human-header	df -h / | head -1
+date-pad-flags	date -d '2026-01-05 07:08:09' '+%-d %-m %-H|%e|%_H'
+date-tz-colon	TZ=Asia/Kolkata date -d '2026-10-12 00:00 UTC' '+%z %:z %::z'
+date-week	date -d '2026-01-01' '+%V %G %U %W %j'
+date-utc-z	date -u -d '2026-10-12T09:30:00Z' +%s
+printf-invalid-num	env printf '%d\n' abc; echo "rc=$?"
+printf-too-few	env printf '%s-%s\n' a b c
+seq-separator	seq -s, 1 5
+head-zero	head -n 0 words.txt; echo "rc=$?"
+expand-tabs	env printf 'a\tb\tc\n' | expand -t 4 | od -An -c
+od-x4	od -An -tx4 hello.txt
+split-chunks	split -n 3 words.txt ch- && wc -c ch-* | head -3
+chmod-capital-x	chmod -R a+X dir && stat -c '%a %n' dir dir/a
+ln-existing	ln -s hello.txt words.txt
+sleep-suffix	sleep 0.1s; echo "rc=$?"
+nice-adjust	nice -n 5 nice
+sort-blank-key	printf ' b 2\na 1\n  c 3\n' | sort -k1,1
+sort-stable-key	printf 'b 1\na 1\nc 0\n' | sort -s -k2,2n
+tr-range-utf8	echo 'héllo' | tr 'a-z' 'A-Z'
+wc-multi-total	wc -l words.txt dup.txt
+cksum-default	cksum hello.txt
+sum-bsd	sum hello.txt
+md5-check-format	md5sum hello.txt | md5sum -c - 2>&1 | head -1; md5sum hello.txt > h.md5; md5sum -c h.md5
+rmdir-nonempty	rmdir dir
+mkdir-parents-verbose	mkdir -pv new/a/b
+mv-verbose	mv -v target.txt moved.txt
+cp-verbose	cp -v hello.txt copy.txt
+rm-verbose	rm -v hello.txt
+touch-missing-dir	touch nodir/x
+stat-missing	stat nope.txt
+id-groups	id -Gn
+uname-machine	uname -m

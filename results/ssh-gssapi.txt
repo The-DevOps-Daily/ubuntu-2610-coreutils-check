@@ -1,0 +1,28 @@
+== 26.04
+OpenSSH_10.2p1 Ubuntu-2ubuntu3.7, OpenSSL 3.5.5 27 Jan 2026
+-- GSSAPI lines in /etc/ssh/ssh_config:
+27:#   GSSAPIAuthentication no
+28:#   GSSAPIDelegateCredentials no
+29:#   GSSAPIKeyExchange no
+30:#   GSSAPITrustDNS no
+52:    GSSAPIAuthentication yes
+-- ssh -G with -o GSSAPIAuthentication=yes:
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+exit=0
+-- ssh -G with GSSAPI lines in ~/.ssh/config:
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+exit=0
+== 26.10
+OpenSSH_10.5p1 Ubuntu-1ubuntu2, OpenSSL 4.0.1 9 Jun 2026
+-- GSSAPI lines in /etc/ssh/ssh_config:
+27:#   GSSAPIAuthentication no
+28:#   GSSAPIDelegateCredentials no
+-- ssh -G with -o GSSAPIAuthentication=yes:
+command-line line 0: Unsupported option "gssapiauthentication"
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+exit=0
+-- ssh -G with GSSAPI lines in ~/.ssh/config:
+/root/.ssh/config line 2: Unsupported option "gssapiauthentication"
+/root/.ssh/config line 3: Unsupported option "gssapidelegatecredentials"
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+exit=0

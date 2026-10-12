@@ -1,0 +1,25 @@
+## providers of default-dbus-system-bus
+Reverse Provides: 
+dbus 1.16.2-2ubuntu4 (= )
+## dbus implementation pulled in by systemd-sysv
+## dbus implementation pulled in by the dbus package
+dbus-bin
+dbus-session-bus-common
+dbus-daemon
+dbus-system-bus-common
+dbus
+## archive component
+dbus: Section: devel
+dbus-broker: Section: universe/admin
+dbus-daemon: Section: admin
+dbus-bin: Section: admin
+## openssh-client candidate
+openssh-client:
+  Installed: (none)
+  Candidate: 1:10.2p1-2ubuntu3.7
+## ssh -V
+OpenSSH_10.2p1 Ubuntu-2ubuntu3.7, OpenSSL 3.5.5 27 Jan 2026
+## ssh with GSSAPIAuthentication=yes
+gssapiauthentication yes
+gssapikeyexchange no
+gssapidelegatecredentials no

@@ -1,0 +1,23 @@
+## providers of default-dbus-system-bus
+Reverse Provides: 
+dbus-broker 37-5ubuntu5 (= )
+## dbus implementation pulled in by systemd-sysv
+## dbus implementation pulled in by the dbus package
+dbus-bin
+dbus-session-bus-common
+dbus-daemon
+dbus-system-bus-common
+dbus
+## archive component
+dbus: Section: universe/devel
+dbus-broker: Section: admin
+dbus-daemon: Section: universe/admin
+dbus-bin: Section: admin
+## openssh-client candidate
+openssh-client:
+  Installed: (none)
+  Candidate: 1:10.5p1-1ubuntu2
+## ssh -V
+OpenSSH_10.5p1 Ubuntu-1ubuntu2, OpenSSL 4.0.1 9 Jun 2026
+## ssh with GSSAPIAuthentication=yes
+command-line line 0: Unsupported option "gssapiauthentication"
