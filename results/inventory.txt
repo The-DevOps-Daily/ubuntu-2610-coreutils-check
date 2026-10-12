@@ -1,0 +1,88 @@
+a91d5a93010193712d346d761372b7c9db6dfcf093893161c64ca107f05914f2  ubuntu-base-24.04.5-base-arm64.tar.gz
+11534a7d4d94db63e7c65d6012b8696abdd6cf14b4efde01c6b1da196b77bc3b  ubuntu-base-25.10-base-arm64.tar.gz
+5a1906794ced63a71a8119c3f211ef5f0bbe0a243001b4bbd41fdf80c5b219fd  ubuntu-base-26.04.1-base-arm64.tar.gz
+04fcfbdd895c8c20fc98d3a3c1fc18a7fa424437e65d39a28179e347bd6bb5e5  ubuntu-base-26.10-beta-base-arm64.tar.gz
+== 24.04
+Ubuntu 24.04.5 LTS
+coreutils 9.4-3ubuntu6.3
+cp -> /usr/bin/cp
+mv -> /usr/bin/mv
+rm -> /usr/bin/rm
+chmod -> /usr/bin/chmod
+chown -> /usr/bin/chown
+df -> /usr/bin/df
+true -> /usr/bin/true
+ls -> /usr/bin/ls
+sort -> /usr/bin/sort
+date -> /usr/bin/date
+cut -> /usr/bin/cut
+timeout -> /usr/bin/timeout
+base64 -> /usr/bin/base64
+comm -> /usr/bin/comm
+gnu* binaries in /usr/bin: 0
+== 25.10
+Ubuntu 25.10
+coreutils 9.5-1ubuntu2+0.0.0~ubuntu24
+coreutils-from-gnu 
+coreutils-from-uutils 0.0.0~ubuntu24
+gnu-coreutils 9.5-1ubuntu4
+rust-coreutils 0.2.2-0ubuntu2
+cp -> /usr/bin/gnucp
+mv -> /usr/bin/gnumv
+rm -> /usr/bin/gnurm
+chmod -> /usr/bin/gnuchmod
+chown -> /usr/bin/gnuchown
+df -> /usr/bin/gnudf
+true -> /usr/bin/gnutrue
+ls -> /usr/lib/cargo/bin/coreutils/ls
+sort -> /usr/lib/cargo/bin/coreutils/sort
+date -> /usr/lib/cargo/bin/coreutils/date
+cut -> /usr/lib/cargo/bin/coreutils/cut
+timeout -> /usr/lib/cargo/bin/coreutils/timeout
+base64 -> /usr/lib/cargo/bin/coreutils/base64
+comm -> /usr/lib/cargo/bin/coreutils/comm
+gnu* binaries in /usr/bin: 104
+== 26.04
+Ubuntu 26.04.1 LTS
+coreutils 9.5-1ubuntu2+0.0.0~ubuntu25
+coreutils-from-gnu 
+coreutils-from-uutils 0.0.0~ubuntu25
+gnu-coreutils 9.7-3ubuntu2
+rust-coreutils 0.8.0-0ubuntu3
+cp -> /usr/bin/gnucp
+mv -> /usr/bin/gnumv
+rm -> /usr/bin/gnurm
+chmod -> /usr/lib/cargo/bin/coreutils/chmod
+chown -> /usr/lib/cargo/bin/coreutils/chown
+df -> /usr/bin/gnudf
+true -> /usr/bin/gnutrue
+ls -> /usr/lib/cargo/bin/coreutils/ls
+sort -> /usr/lib/cargo/bin/coreutils/sort
+date -> /usr/lib/cargo/bin/coreutils/date
+cut -> /usr/lib/cargo/bin/coreutils/cut
+timeout -> /usr/lib/cargo/bin/coreutils/timeout
+base64 -> /usr/lib/cargo/bin/coreutils/base64
+comm -> /usr/lib/cargo/bin/coreutils/comm
+gnu* binaries in /usr/bin: 104
+== 26.10
+Ubuntu Stonking Stingray (development branch)
+coreutils 9.10+2ubuntu1
+coreutils-from-gnu 
+coreutils-from-uutils 2ubuntu1
+gnu-coreutils 9.10-1ubuntu2
+rust-coreutils 0.12.0-1ubuntu1
+cp -> /usr/lib/cargo/bin/coreutils/cp
+mv -> /usr/lib/cargo/bin/coreutils/mv
+rm -> /usr/lib/cargo/bin/coreutils/rm
+chmod -> /usr/lib/cargo/bin/coreutils/chmod
+chown -> /usr/lib/cargo/bin/coreutils/chown
+df -> /usr/lib/cargo/bin/coreutils/df
+true -> /usr/lib/cargo/bin/coreutils/true
+ls -> /usr/lib/cargo/bin/coreutils/ls
+sort -> /usr/lib/cargo/bin/coreutils/sort
+date -> /usr/lib/cargo/bin/coreutils/date
+cut -> /usr/lib/cargo/bin/coreutils/cut
+timeout -> /usr/lib/cargo/bin/coreutils/timeout
+base64 -> /usr/lib/cargo/bin/coreutils/base64
+comm -> /usr/lib/cargo/bin/coreutils/comm
+gnu* binaries in /usr/bin: 104

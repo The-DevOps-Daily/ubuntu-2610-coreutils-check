@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Time common workloads with GNU 9.10 and uutils 0.12.0 inside the same
-# Ubuntu 26.10 rootfs. Each workload runs 7 times per implementation, the two
+# Ubuntu 26.10 rootfs. Each workload runs 9 times per implementation, the two
 # implementations alternate, and results/bench.tsv keeps every run. Run 1 is
 # a warm-up and 06-bench-summary.py leaves it out of the medians.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 R=rootfs/26.10
-RUNS=${RUNS:-7}
+RUNS=${RUNS:-9}
 sudo mkdir -p "$R/bench"
 # Real /dev and /proc inside the chroot. Without them ">/dev/null" creates a
 # regular file and every run writes its output to disk (our first run did).
